@@ -1,0 +1,22 @@
+{
+  "name": "eslint",
+  "description": "eslint rules",
+  "keywords": [
+    "eslint",
+    "eslintrc",
+    "configuration",
+    "rules"
+  ],
+  "version": "0.0.1",
+  "publish": false,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/orlin/eslints.git"
+  },
+  "licenses": [
+    {
+      "type": "Unlicense",
+      "url": "http://unlicense.org"
+    }
+  ]
+}

@@ -1,17 +1,19 @@
 {
-  "name": "eslints",
-  "description": "eslint rules",
+  "name": "hal-rc",
+  "description": "*hints-and-lints rc*",
   "keywords": [
     "eslint",
     "eslintrc",
     "configuration",
-    "rules"
+    "rules",
+    "jshint",
+    "jshintrc"
   ],
-  "version": "0.0.1",
-  "publish": false,
+  "version": "0.0.0-1",
+  "publish": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/orlin/eslints.git"
+    "url": "git://github.com/orlin/hal.git"
   },
   "licenses": [
     {

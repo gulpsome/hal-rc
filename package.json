@@ -20,5 +20,8 @@
       "type": "Unlicense",
       "url": "http://unlicense.org"
     }
-  ]
+  ],
+  "dependencies": {
+    "jscs": "^1.12.0"
+  }
 }

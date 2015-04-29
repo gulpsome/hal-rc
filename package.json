@@ -9,7 +9,7 @@
     "jshint",
     "jshintrc"
   ],
-  "version": "0.0.0-1",
+  "version": "0.0.1",
   "publish": true,
   "repository": {
     "type": "git",

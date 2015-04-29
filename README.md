@@ -4,10 +4,12 @@
 
 ## Why
 
+```txt
 Node modules tend to be many.
 One tends to repeat, oneself.
 Over and over copy / pasting.
 Even with the best practices.
+```
 
 For one example this could be the perfect implementation of your *code linting* best practices, as described in Henrik Joreteg's [Human JavaScript](http://read.humanjavascript.com/ch03-code-for-humans.html) / *code for humans*.
 

@@ -1,6 +1,3 @@
-# TODO: move documentation pertaining to this from orlin/beverage
-# as gulp is optional, document which options are gulp-specific
-
 require("source-map-support").install()
 R = require("ramda")
 fs = require("fs")

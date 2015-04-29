@@ -2,15 +2,11 @@
 
 Hal should be, well linted.
 
-## What
-
-A `.eslintrc` to be reused by various node + babel es6 projects.
-A `.jshintrc`, with almost nothing in it just like the above.
-More to come...
-
 ## Use
 
 [![NPM](https://nodei.co/npm/hal-rc.png?mini=true)](https://www.npmjs.org/package/hal-rc)
+
+I keep my rules in `rc/`.
 
 ## Test [![Build Status](https://img.shields.io/travis/orlin/hal-rc.svg?style=flat)](https://travis-ci.org/orlin/hal-rc)
 

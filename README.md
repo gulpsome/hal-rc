@@ -1,8 +1,10 @@
 # hal (-) \*rc
 
-*Hal should be, well, linted.*
+*Hal should be, well, linted, to begin with.*
 
 ## Why
+
+Or what is the point of this?
 
 ```txt
 Node modules tend to be many.
@@ -11,21 +13,22 @@ Over and over copy / pasting.
 Even with the best practices.
 ```
 
-For one example this could be the perfect implementation of your *code linting* best practices, as described in Henrik Joreteg's [Human JavaScript](http://read.humanjavascript.com/ch03-code-for-humans.html) / *code for humans*.
+For one example this could be the perfect implementation of your *code linting* best practices, as described in Henrik Joreteg's [Human JavaScript](http://read.humanjavascript.com/ch03-code-for-humans.html) / *code for humans*.  Say one works on a project using [airbnb](https://github.com/airbnb/javascript)'s style.  The following `gulpfile.js` would give one `gulp sourcegate` and `gulp sourcegate:watch` tasks for writing `.jshintrc` and `.jscsrc` to a project's root:
 
-## What
+```javascript
+var gulp = require('beverage')(require('gulp'), {
+  sourcegate: [{recipe: 'jscs'}, {recipe: 'jshint'}],
+  sourcegatePreset: 'airbnb'
+})
+```
 
-1. Make [sourcegate](https://github.com/orlin/sourcegate) more conveniently configurable, especially in the context of [beverage](https://github.com/orlin/beverage), for the purpose of writing `.*rc` files that will setup hinting and linting rules for a project - without copy / paste.  In this context `hal-rc` simply gets the options ready for calling `sourcegate` with.
-
-2. Offer `gulpfriendly` task(s) creation, while keeping it optional - i.e. call without the `gulp` argument and build your own workflow using whatever approach / other tools you may prefer instead.
-
-3. A place where I keep my own linting rules and preferences - in `rc/*`.  This would be irrelevant for anybody else though feel free to follow / tweak my coding standard if you like.  Unless of course we collaborate on some projects that are based on these settings.  In which case we can negotiate the rules, in common.  Easy setup makes for an easy start.  I'm not religious, about what code should look like.
+One could setup linting rule overrides by mere configuration.  No need to fork presets.  If this became a coding standard for more than one project, one could reuse the configuration.  But I'm getting ahead of myself.  Back to `hal-rc` and what it does.
 
 ## Use
 
 [![NPM](https://nodei.co/npm/hal-rc.png?mini=true)](https://www.npmjs.org/package/hal-rc)
 
-### Scenario 1:
+1. Make [sourcegate](https://github.com/orlin/sourcegate) more conveniently configurable, especially in the context of [beverage](https://github.com/orlin/beverage), for the purpose of writing `.*rc` files that will setup hinting and linting rules for a project - without copy / paste.  In this context `hal-rc` simply gets the options ready for calling `sourcegate` with.
 
 ```javascript
 var options = require('hal-rc')({
@@ -34,7 +37,7 @@ var options = require('hal-rc')({
 // call sourcegate with the above, see the tests about how
 ```
 
-### Scenario 2:
+2. Offer `gulpfriendly` task(s) creation, while keeping it optional - i.e. call without the `gulp` argument and build your own workflow using whatever approach / other tools you may prefer instead.
 
 ```javascript
 require('hal-rc')({
@@ -42,6 +45,8 @@ require('hal-rc')({
 }, require('gulp'))
 // use gulp cli for running the sourcegate tasks
 ```
+
+3. A place where I keep my own linting rules and preferences - in `rc/*`.  This would be irrelevant for anybody else though feel free to follow / tweak my coding standard if you like.  Unless of course we collaborate on some projects that are based on these settings.  In which case we can negotiate the rules, in common.  Easy setup makes for an easy start.  I'm not religious, about what code should look like.
 
 ### Configure:
 

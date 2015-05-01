@@ -30,21 +30,21 @@ One could setup linting rule overrides by mere configuration.  No need to fork p
 
 1. Make [sourcegate](https://github.com/orlin/sourcegate) more conveniently configurable, especially in the context of [beverage](https://github.com/orlin/beverage), for the purpose of writing `.*rc` files that will setup hinting and linting rules for a project - without copy / paste.  In this context `hal-rc` simply gets the options ready for calling `sourcegate` with.
 
-```javascript
-var options = require('hal-rc')({
-  // options listed next
-})
-// call sourcegate with the above, see the tests about how
-```
+    ```javascript
+    var options = require('hal-rc')({
+      // options listed next
+    })
+    // call sourcegate with the above, see the tests about how
+    ```
 
 2. Offer `gulpfriendly` task(s) creation, while keeping it optional - i.e. call without the `gulp` argument and build your own workflow using whatever approach / other tools you may prefer instead.
 
-```javascript
-require('hal-rc')({
-  // options listed next
-}, require('gulp'))
-// use gulp cli for running the sourcegate tasks
-```
+    ```javascript
+    require('hal-rc')({
+      // options listed next
+    }, require('gulp'))
+    // use gulp cli for running the sourcegate tasks
+    ```
 
 3. A place where I keep my own linting rules and preferences - in `rc/*`.  This would be irrelevant for anybody else though feel free to follow / tweak my coding standard if you like.  Unless of course we collaborate on some projects that are based on these settings.  In which case we can negotiate the rules, in common.  Easy setup makes for an easy start.  I'm not religious, about what code should look like.
 
@@ -57,7 +57,7 @@ require('hal-rc')({
 - `sourcegatePreset: "airbnb"` for example, in some cases there are presets across tools, this sets a default one for configuration DRY-ness; presets of tools installed in the project's `node_modules` have priority over presets form `sourcegateModule`'s `node_modules`, this way a project can have its own version of presets
 - `sourcegateWatch: true` will create a `sourcegate:watch` task, if `hal-rc` is handed `gulp` via the second argument
 
-The above options can be used to setup configuration files from a template to the project's root with possible overrides.  This is done with the [sourcegate module](https://github.com/orlin/sourcegate) and some example files would be: `.jshintrc`, `.jscsrc`, `.eslintrc`, etc.  If there is a package in node_modules that contains some / many / most / all your baseline defaults for coding style preferences / standards, `sourcegateModule` will tell beverage about it so the config is DRYer.  Or each template can set its own individual module / path.  It could be a published module, or a git repo in `devDependencies`.  Beverage offers convenient setup for tools that use json config files, for example:
+The above options can be used to setup configuration files from a template to the project's root with possible overrides.  This is done with the [sourcegate module](https://github.com/orlin/sourcegate) and some example files would be: `.jshintrc`, `.jscsrc`, `.eslintrc`, etc.  If there is a package in node_modules that contains some / many / most / all your baseline defaults for coding style preferences / standards, `sourcegateModule` will tell HAL about it so the config is DRYer.  Or each template can set its own individual module / path.  It could be a published module, or a git repo in `devDependencies`.  One gets a convenient setup for tools that use json config files, for example:
 
 - [jscs](http://jscs.info)
 - [jshint](http://jshint.com)
@@ -81,8 +81,10 @@ The config would look like:
 ```
 
 Some tools, such as jscs have presets, use the `preset` option for easy config.
-In this case, jscs would have to be a dependency of the project using beverage,
-or the configured `module`, checked in precisely this order.
+In this case, jscs would have to be a dependency of either:
+
+1. the project using the `hal-rc` or `beverage` module
+2. the configured `sourcegateModule`
 
 The `recipe`, `module`, `prefix` and `preset` options are merely conveniences.
 

@@ -3,11 +3,11 @@
   "description": "*hints-and-lints rc*",
   "keywords": [
     "eslint",
-    "eslintrc",
+    "coffeelint",
     "configuration",
     "rules",
-    "jshint",
-    "jshintrc"
+    "jscs",
+    "jshint"
   ],
   "version": "0.0.1",
   "publish": true,
@@ -38,6 +38,7 @@
     "coffee-script": "^1.9.1",
     "gulp": "^3.8.11",
     "gulp-help": "^1.3.4",
+    "gulp-util": "^3.0.4",
     "mocha": "^2.2.1"
   },
   "scripts": {

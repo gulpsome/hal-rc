@@ -28,7 +28,7 @@
     "jscs": "1.12.x",
     "ramda": "^0.13.0",
     "source-map-support": "^0.2.10",
-    "sourcegate": "^0.1.1",
+    "sourcegate": "^0.1.2",
     "strip-json-comments": "^1.0.2"
   },
   "devDependencies": {

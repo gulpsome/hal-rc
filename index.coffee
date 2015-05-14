@@ -5,7 +5,7 @@ path = require("path")
 isThere = require("is-there").sync
 sourcegate = require("sourcegate")
 nocomments = require("strip-json-comments")
-#gutil = require("gulp-util")
+#gutil = require("gulp-util") # keep commened-out or mode to dependencies
 
 
 get = (what, module) ->

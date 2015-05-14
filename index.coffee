@@ -31,11 +31,11 @@ getPreset = (tool, name, module) ->
       airbnb: "airbnb-style/linters/jshintrc"
     eslint:
       airbnb: "airbnb-style/linters/eslintrc"
+    coffeelint:
+      "coffeescript-style-guide": "coffeescript-style-guide/coffeelint.json"
 
   if tool is "jscs"
     get("#{presets.jscs}/#{name}.json", module)
-  else if tool is "coffeelint" and name is "coffeescript-style-guide"
-    get("coffeescript-style-guide/coffeelint.json", module)
   else if presets[tool]?[name]?
     get(presets[tool][name], module)
   else {}

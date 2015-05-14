@@ -62,6 +62,7 @@ The above options can be used to setup configuration files from a template to th
 - [jscs](http://jscs.info)
 - [jshint](http://jshint.com)
 - [eslint](http://eslint.org)
+- [coffeelint](http://www.coffeelint.org)
 
 These tools are here called recipes.
 Any tool that looks for its configuration in a ".#{tool}rc" file,
@@ -73,7 +74,7 @@ The config would look like:
   recipe: 'name', // a tool's name
   module: 'name', // overrides the sourcegateModule default
   prefix: '.', // what goes between module and "#{recipe}rc"
-  preset: 'name', // this is only relevant for jscs, or "airbnb" so far
+  preset: 'name', // so far only for `jscs`, or "airbnb", or "coffeescript-style-guide"
   sources: [], // sourcegate's first argument - stuff to merge
   sources: {}, // shorthand for overrides that don't come from a file
   options: {} // handed to sourcegate
@@ -85,6 +86,8 @@ In this case, jscs would have to be a dependency of either:
 
 1. the project using the `hal-rc` or `beverage` module
 2. the configured `sourcegateModule`
+
+Presets are just a way to bootstrap one's styleduide, by taking defaults from another styleguide - the one providing the presets.  It could be any node module or a non-packaged repo used as module with [napa](https://github.com/shama/napa) for example.  If `sourcegate` can read it, and your tools (linters) use JSON config, then it's supported already.
 
 The `recipe`, `module`, `prefix` and `preset` options are merely conveniences.
 

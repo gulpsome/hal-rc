@@ -5,6 +5,7 @@ path = require("path")
 isThere = require("is-there").sync
 sourcegate = require("sourcegate")
 nocomments = require("strip-json-comments")
+#gutil = require("gulp-util")
 
 
 get = (what, module) ->
@@ -33,6 +34,8 @@ getPreset = (tool, name, module) ->
 
   if tool is "jscs"
     get("#{presets.jscs}/#{name}.json", module)
+  else if tool is "coffeelint" and name is "coffeescript-style-guide"
+    get("coffeescript-style-guide/coffeelint.json", module)
   else if presets[tool]?[name]?
     get(presets[tool][name], module)
   else {}
@@ -49,30 +52,29 @@ module.exports = (o = {}, gulp) ->
   for sg in o.sourcegate
     res = R.clone(empty)
     unless sg.sources?
-      sg.sources = o.sourcegateRx?[sg.recipe] || []
+      sg.sources = o.sourcegateRx?[sg.recipe] or []
     else unless R.is(Array, sg.sources)
       sg.sources = [sg.sources]
     sg.options ?= {}
 
     unless sg.recipe?
       res = [sg.sources, sg.options]
-
     else
       sources = []
-      config = "node_modules"
-      module = sg.module || o.sourcegateModule
-      prefix = sg.prefix || o.sourcegatePrefix || ''
-      preset = sg.preset || o.sourcegatePreset
-      if module
-        sources.push getPreset(sg.recipe, preset, module) if preset?
-        config = path.normalize("#{config}/#{module}/#{prefix}#{sg.recipe}rc")
-        if isThere config
-          if o.sourcegateWatch
-            watch.push config
-          sources.push config
-        sg.options.write ?= {}
-        sg.options.write.path = ".#{sg.recipe}rc"
-
+      module = sg.module or o.sourcegateModule
+      prefix = sg.prefix or o.sourcegatePrefix or ''
+      preset = sg.preset or o.sourcegatePreset
+      sources.push getPreset(sg.recipe, preset, module) if preset?
+      filerc = if sg.recipe is "coffeelint" then "coffeelint.json" else ".#{sg.recipe}rc"
+      config = "#{prefix}#{filerc}"
+      config = "node_modules/#{module}/#{config}" if module
+      config = path.normalize(config)
+      if isThere config
+        if o.sourcegateWatch
+          watch.push config
+        sources.push config
+      sg.options.write ?= {}
+      sg.options.write.path = filerc
       res = [sources.concat(sg.sources), sg.options]
 
     ready.push res

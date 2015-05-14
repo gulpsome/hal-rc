@@ -3,11 +3,11 @@
   "description": "*hints-and-lints rc*",
   "keywords": [
     "eslint",
-    "eslintrc",
+    "coffeelint",
     "configuration",
     "rules",
-    "jshint",
-    "jshintrc"
+    "jscs",
+    "jshint"
   ],
   "version": "0.0.1",
   "publish": true,
@@ -26,9 +26,10 @@
     "airbnb-style": "airbnb/javascript",
     "is-there": "^1.1.0",
     "jscs": "1.12.x",
+    "napa": "^1.2.0",
     "ramda": "^0.13.0",
     "source-map-support": "^0.2.10",
-    "sourcegate": "^0.1.1",
+    "sourcegate": "^0.1.2",
     "strip-json-comments": "^1.0.2"
   },
   "devDependencies": {
@@ -38,10 +39,12 @@
     "coffee-script": "^1.9.1",
     "gulp": "^3.8.11",
     "gulp-help": "^1.3.4",
+    "gulp-util": "^3.0.4",
     "mocha": "^2.2.1"
   },
   "scripts": {
     "build": "node_modules/.bin/coffee-inline-map -b -o index.js index.coffee",
+    "install": "napa polarmobile/coffeescript-style-guide",
     "test": "node_modules/.bin/mocha"
   }
 }

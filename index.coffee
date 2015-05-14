@@ -34,6 +34,8 @@ getPreset = (tool, name, module) ->
 
   if tool is "jscs"
     get("#{presets.jscs}/#{name}.json", module)
+  else if tool is "coffeelint" and name is "coffeescript-style-guide"
+    get("coffeescript-style-guide/coffeelint.json", module)
   else if presets[tool]?[name]?
     get(presets[tool][name], module)
   else {}
@@ -50,7 +52,7 @@ module.exports = (o = {}, gulp) ->
   for sg in o.sourcegate
     res = R.clone(empty)
     unless sg.sources?
-      sg.sources = o.sourcegateRx?[sg.recipe] || []
+      sg.sources = o.sourcegateRx?[sg.recipe] or []
     else unless R.is(Array, sg.sources)
       sg.sources = [sg.sources]
     sg.options ?= {}
@@ -59,9 +61,9 @@ module.exports = (o = {}, gulp) ->
       res = [sg.sources, sg.options]
     else
       sources = []
-      module = sg.module || o.sourcegateModule
-      prefix = sg.prefix || o.sourcegatePrefix || ''
-      preset = sg.preset || o.sourcegatePreset
+      module = sg.module or o.sourcegateModule
+      prefix = sg.prefix or o.sourcegatePrefix or ''
+      preset = sg.preset or o.sourcegatePreset
       sources.push getPreset(sg.recipe, preset, module) if preset?
       filerc = if sg.recipe is "coffeelint" then "coffeelint.json" else ".#{sg.recipe}rc"
       config = "#{prefix}#{filerc}"

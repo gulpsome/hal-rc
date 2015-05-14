@@ -26,6 +26,7 @@
     "airbnb-style": "airbnb/javascript",
     "is-there": "^1.1.0",
     "jscs": "1.12.x",
+    "napa": "^1.2.0",
     "ramda": "^0.13.0",
     "source-map-support": "^0.2.10",
     "sourcegate": "^0.1.2",
@@ -43,6 +44,7 @@
   },
   "scripts": {
     "build": "node_modules/.bin/coffee-inline-map -b -o index.js index.coffee",
+    "install": "napa polarmobile/coffeescript-style-guide",
     "test": "node_modules/.bin/mocha"
   }
 }

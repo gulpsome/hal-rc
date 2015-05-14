@@ -4,9 +4,9 @@ var gulp = require('beverage')(require('gulp'), {
   test: {},
   testWatch: ['index.js', 'test/*.coffee'],
   sourcegate: [
-    {recipe: 'coffeelint'},
-    {recipe: 'jscs'},
-    {recipe: 'jshint'}
+    {recipe: 'coffeelint', preset: 'coffeescript-style-guide'},
+    {recipe: 'jshint'},
+    {recipe: 'jscs'}
   ],
   sourcegateModule: false, // this is the module, used here for self-config
   sourcegatePrefix: 'rc/',

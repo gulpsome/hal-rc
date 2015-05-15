@@ -2,7 +2,7 @@ require("source-map-support").install()
 R = require("ramda")
 fs = require("fs")
 path = require("path")
-isThere = require("is-there").sync
+isThere = require("is-there")
 sourcegate = require("sourcegate")
 nocomments = require("strip-json-comments")
 #gutil = require("gulp-util") # keep commened-out or mode to dependencies

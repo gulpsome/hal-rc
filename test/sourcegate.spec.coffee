@@ -3,7 +3,7 @@
 s = require('../index.js')
 sourcegate = require('sourcegate')
 fs = require('fs')
-isThere = require("is-there").sync
+isThere = require("is-there")
 
 testWR = "test/out" # stands for testWriteRoot
 # 0 test's it "text"
@@ -41,11 +41,11 @@ describe "hal-rc", ->
   describe "-", ->
     gulp = null
     for [testName, paths, so] in testWriteFiles
-      before () ->
+      before ->
         gulp = require('gulp-help')(require('gulp'))
         for file in paths
           try fs.unlinkSync(file)
-      after () ->
+      after ->
         for file in paths
           try fs.unlinkSync(file)
       it testName, ->

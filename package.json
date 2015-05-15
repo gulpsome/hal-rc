@@ -24,7 +24,7 @@
   "main": "index.js",
   "dependencies": {
     "airbnb-style": "airbnb/javascript",
-    "is-there": "^1.1.0",
+    "is-there": "^2.0.0",
     "jscs": "1.12.x",
     "napa": "^1.2.0",
     "ramda": "^0.13.0",

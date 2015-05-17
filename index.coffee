@@ -5,23 +5,30 @@ path = require("path")
 isThere = require("is-there")
 sourcegate = require("sourcegate")
 nocomments = require("strip-json-comments")
-#gutil = require("gulp-util") # keep commened-out or mode to dependencies
+#gutil = require("gulp-util") # keep commened-out or move to dependencies
 
+
+obtain = (somewhere) ->
+  JSON.parse nocomments fs.readFileSync(path.normalize somewhere).toString()
 
 get = (what, module) ->
   where = [
     "node_modules/#{what}",
-    "node_modules/#{module}/node_modules/#{what}"
+    "node_modules/#{module}/node_modules/#{what}",
+    "node_modules/beverage/node_modules/#{module}/node_modules/#{what}"
   ]
 
   try
-    JSON.parse nocomments fs.readFileSync(path.normalize where[0]).toString()
+    obtain where[0]
   catch
     try
-      JSON.parse nocomments fs.readFileSync(path.normalize where[1]).toString()
-    catch e
-      console.error(e)
-      throw new Error "Could not find preset at: #{where}"
+      obtain where[1]
+    catch
+      try
+        obtain where[2]
+      catch e
+        console.error(e)
+        throw new Error "Could not find preset at: #{where}"
 
 
 getPreset = (tool, name, module) ->

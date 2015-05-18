@@ -59,8 +59,10 @@ module.exports = (o = {}, gulp) ->
   for sg in o.sourcegate
     res = R.clone(empty)
     unless sg.sources?
+      # TODO: sources aren't specified - seems like sourcegateRx can be done without?
       sg.sources = o.sourcegateRx?[sg.recipe] or []
     else unless R.is(Array, sg.sources)
+      # TODO: this also appears unnecessary (due to Array.concat)
       sg.sources = [sg.sources]
     sg.options ?= {}
 
@@ -71,17 +73,20 @@ module.exports = (o = {}, gulp) ->
       module = sg.module or o.sourcegateModule
       prefix = sg.prefix or o.sourcegatePrefix or ''
       preset = sg.preset or o.sourcegatePreset
+      # 1. start with preset (something known / standard)
       sources.push getPreset(sg.recipe, preset, module) if preset?
       filerc = if sg.recipe is "coffeelint" then "coffeelint.json" else ".#{sg.recipe}rc"
       config = "#{prefix}#{filerc}"
       config = "node_modules/#{module}/#{config}" if module
       config = path.normalize(config)
+      # 2. override with a module config (anybody can have presets)
       if isThere config
         if o.sourcegateWatch
           watch.push config
         sources.push config
       sg.options.write ?= {}
       sg.options.write.path = filerc
+      # 3. sources, whether an object or array, become the final override
       res = [sources.concat(sg.sources), sg.options]
 
     ready.push res

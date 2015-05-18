@@ -51,7 +51,7 @@ One could setup linting rule overrides by mere configuration.  No need to fork p
 ### Configure:
 
 - `sourcegate: []` creates tasks that write configuration files, documented next
-- `sourcegateRx: {}` abbreviation for sourcegateRecipeDefaults so one can skip stuff like `sources: {node: true}` for each jshint-linted project, skip the defaults with `sourcegate: [{recipe: 'jshint', sources: {}}] for example, or override with sourcegateModule / module config`
+- `sourcegateRx: {}` abbreviation for sourcegateRecipeDefaults so one can skip stuff like `sources: {node: true}` for each jshint-linted project, skip the defaults with `sourcegate: [{recipe: 'jshint', sources: {}}]`, for example, or override with `sourcegateModule / module` config
 - `sourcegateModule: 'a-node_modules-module-name'` optional like everything else
 - `sourcegatePrefix`: '.'` will look for `".#{recipe}rc"`, it can also be a path
 - `sourcegatePreset: "airbnb"` for example, in some cases there are presets across tools, this sets a default one for configuration DRY-ness; presets of tools installed in the project's `node_modules` have priority over presets form `sourcegateModule`'s `node_modules`, this way a project can have its own version of presets

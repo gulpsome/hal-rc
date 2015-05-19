@@ -87,7 +87,8 @@ module.exports = (o = {}, gulp) ->
       sg.options.write ?= {}
       sg.options.write.path = filerc
       # 3. sources, whether an object or array, become the final override
-      res = [sources.concat(sg.sources), sg.options]
+      sources.concat(sg.sources) if sg.sources?
+      res = [sources, sg.options]
 
     ready.push res
 

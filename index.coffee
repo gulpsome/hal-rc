@@ -12,6 +12,7 @@ obtain = (somewhere) ->
   JSON.parse nocomments fs.readFileSync(path.normalize somewhere).toString()
 
 get = (what, module) ->
+  # gutil.log "find what '#{what}' in module '#{module}'"
   where = [
     "node_modules/#{what}",
     "node_modules/#{module}/node_modules/#{what}",
@@ -61,6 +62,7 @@ module.exports = (o = {}, gulp) ->
     sg.options ?= {}
 
     unless sg.recipe?
+      # 0. without a recipe, hal-rc just hands sources and options to sourcegate
       res = [sg.sources, sg.options]
     else
       sources = []

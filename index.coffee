@@ -57,11 +57,8 @@ module.exports = (o = {}, gulp) ->
   watch = []
 
   for sg in o.sourcegate
-    sg.options ?= {}
     res = R.clone(empty)
-    unless sg.sources?
-      # TODO: sources aren't specified - seems like sourcegateRx can be done without?
-      sg.sources = o.sourcegateRx?[sg.recipe] or []
+    sg.options ?= {}
 
     unless sg.recipe?
       res = [sg.sources, sg.options]

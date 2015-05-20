@@ -2,26 +2,34 @@ require("source-map-support").install()
 R = require("ramda")
 fs = require("fs")
 path = require("path")
-isThere = require("is-there").sync
+isThere = require("is-there")
 sourcegate = require("sourcegate")
 nocomments = require("strip-json-comments")
-#gutil = require("gulp-util") # keep commened-out or mode to dependencies
+#gutil = require("gulp-util") # keep commened-out or move to dependencies
 
+
+obtain = (somewhere) ->
+  JSON.parse nocomments fs.readFileSync(path.normalize somewhere).toString()
 
 get = (what, module) ->
+  # gutil.log "find what '#{what}' in module '#{module}'"
   where = [
     "node_modules/#{what}",
-    "node_modules/#{module}/node_modules/#{what}"
+    "node_modules/#{module}/node_modules/#{what}",
+    "node_modules/beverage/node_modules/#{module}/node_modules/#{what}"
   ]
 
   try
-    JSON.parse nocomments fs.readFileSync(path.normalize where[0]).toString()
+    obtain where[0]
   catch
     try
-      JSON.parse nocomments fs.readFileSync(path.normalize where[1]).toString()
-    catch e
-      console.error(e)
-      throw new Error "Could not find preset at: #{where}"
+      obtain where[1]
+    catch
+      try
+        obtain where[2]
+      catch e
+        console.error(e)
+        throw new Error "Could not find preset at: #{where}"
 
 
 getPreset = (tool, name, module) ->
@@ -51,31 +59,32 @@ module.exports = (o = {}, gulp) ->
 
   for sg in o.sourcegate
     res = R.clone(empty)
-    unless sg.sources?
-      sg.sources = o.sourcegateRx?[sg.recipe] or []
-    else unless R.is(Array, sg.sources)
-      sg.sources = [sg.sources]
     sg.options ?= {}
 
     unless sg.recipe?
+      # 0. without a recipe, hal-rc just hands sources and options to sourcegate
       res = [sg.sources, sg.options]
     else
       sources = []
       module = sg.module or o.sourcegateModule
       prefix = sg.prefix or o.sourcegatePrefix or ''
       preset = sg.preset or o.sourcegatePreset
+      # 1. start with preset (something known / standard)
       sources.push getPreset(sg.recipe, preset, module) if preset?
       filerc = if sg.recipe is "coffeelint" then "coffeelint.json" else ".#{sg.recipe}rc"
       config = "#{prefix}#{filerc}"
       config = "node_modules/#{module}/#{config}" if module
       config = path.normalize(config)
+      # 2. override with a module config (anybody can have presets)
       if isThere config
         if o.sourcegateWatch
           watch.push config
         sources.push config
       sg.options.write ?= {}
       sg.options.write.path = filerc
-      res = [sources.concat(sg.sources), sg.options]
+      # 3. sources, whether an object or array, become the final override
+      sources.concat(sg.sources) if sg.sources?
+      res = [sources, sg.options]
 
     ready.push res
 

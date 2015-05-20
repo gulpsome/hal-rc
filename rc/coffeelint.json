@@ -15,13 +15,13 @@
     "level": "warn"
   },
   "no_trailing_whitespace": {
-    "level": "error"
+    "level": "warn"
   },
   "no_empty_param_list": {
-    "level": "error"
+    "level": "warn"
   },
   "arrow_spacing": {
-    "level": "error"
+    "level": "warn"
   },
   "no_interpolation_in_single_quotes": {
     "level": "error"
@@ -34,11 +34,11 @@
       "left": 0,
       "right": 1
     },
-    "level": "error"
+    "level": "warn"
   },
   "braces_spacing": {
     "spaces": 0,
-    "level": "error"
+    "level": "warn"
   },
   "no_throwing_strings": {
     "level": "error"

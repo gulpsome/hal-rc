@@ -37,7 +37,7 @@ One could setup linting rule overrides by mere configuration.  No need to fork p
     // call sourcegate with the above, see the tests about how
     ```
 
-2. Offer `gulpfriendly` task(s) creation, while keeping it optional - i.e. call without the `gulp` argument and build your own workflow using whatever approach / other tools you may prefer instead.
+2. Offer `gulpfriendly` task(s) creation, while keeping it optional - i.e. call without the `gulp` argument and build your own workflow using whatever approach / other tools you may prefer instead.  However, if you do use `gulp`, I highly recommend the even more `gulpfriendly` [beverage](https://github.com/orlin/beverage).
 
     ```javascript
     require('hal-rc')({
@@ -48,13 +48,12 @@ One could setup linting rule overrides by mere configuration.  No need to fork p
 
 3. A place where I keep my own linting rules and preferences - in `rc/*`.  This would be irrelevant for anybody else though feel free to follow / tweak my coding standard if you like.  Unless of course we collaborate on some projects that are based on these settings.  In which case we can negotiate the rules, in common.  Easy setup makes for an easy start.  I'm not religious, about what code should look like.
 
-### Configure:
+### Configure
 
-- `sourcegate: []` creates tasks that write configuration files, documented next
-- `sourcegateRx: {}` abbreviation for sourcegateRecipeDefaults so one can skip stuff like `sources: {node: true}` for each jshint-linted project, skip the defaults with `sourcegate: [{recipe: 'jshint', sources: {}}] for example, or override with sourcegateModule / module config`
+- `sourcegate: []` creates tasks that write configuration files, documented further down
 - `sourcegateModule: 'a-node_modules-module-name'` optional like everything else
-- `sourcegatePrefix`: '.'` will look for `".#{recipe}rc"`, it can also be a path
-- `sourcegatePreset: "airbnb"` for example, in some cases there are presets across tools, this sets a default one for configuration DRY-ness; presets of tools installed in the project's `node_modules` have priority over presets form `sourcegateModule`'s `node_modules`, this way a project can have its own version of presets
+- `sourcegatePrefix`: '.'` will look for `".#{recipe}rc"`, it can also be a path fragment
+- `sourcegatePreset: 'airbnb'` for example, in some cases there are presets across tools, this sets a default one for configuration DRY-ness; presets of tools installed in the project's `node_modules` have priority over presets form `sourcegateModule`'s `node_modules`, this way a project can have its own version of presets
 - `sourcegateWatch: true` will create a `sourcegate:watch` task, if `hal-rc` is handed `gulp` via the second argument
 
 The above options can be used to setup configuration files from a template to the project's root with possible overrides.  This is done with the [sourcegate module](https://github.com/orlin/sourcegate) and some example files would be: `.jshintrc`, `.jscsrc`, `.eslintrc`, etc.  If there is a package in node_modules that contains some / many / most / all your baseline defaults for coding style preferences / standards, `sourcegateModule` will tell HAL about it so the config is DRYer.  Or each template can set its own individual module / path.  It could be a published module, or a git repo in `devDependencies`.  One gets a convenient setup for tools that use json config files, for example:
@@ -91,17 +90,29 @@ Presets are just a way to bootstrap one's styleduide, by taking defaults from an
 
 The `recipe`, `module`, `prefix` and `preset` options are merely conveniences.
 
+#### Simplicity
+
 One can always fallback to [sourcegate options](https://github.com/orlin/sourcegate#configure).
 The minimum needed in such a case is:
 
 ```javascript
 {
   sources: [
-    // one or more things to merge
+    // one or more things to merge, paths are ok too
   ],
-  options: {write: {path: 'name-me.json'}} // if not ".#{tool}rc"
+  options: {write: {path: 'name-me.json'}} // if no recipe or not writing ".#{tool}rc"
 }
 ```
+
+#### Overrides
+
+There is a simpler explanation about how this works.  If you state a `"recipe"`, hal-rc it will deep-merge things in the following order:
+
+1. preset (some well-known style-guide that hal-rc supports)
+2. module (containing your own presets / preset-overrides)
+3. sources (final, per-project overrides)
+
+The `sources` are also deep-merged if an array.  It's basically all concatenated into a single array and handed to `sourcegate`, one config-writing `recipe` / item at a time.
 
 ## Test [![Build Status](https://img.shields.io/travis/orlin/hal-rc.svg?style=flat)](https://travis-ci.org/orlin/hal-rc)
 

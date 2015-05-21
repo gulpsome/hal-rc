@@ -1,0 +1,10 @@
+{
+  "sourcegate": [
+    {"recipe": "eslint", "sources": {
+      "parser": "babel-eslint"
+    }}
+  ],
+  "sourcegateModule": "beverage/node_modules/hal-rc", // could be any git repo as well
+  "sourcegatePrefix": "rc/", // these would override any sourcegatePreset
+  "sourcegateWatch": "true"
+}

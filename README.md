@@ -120,6 +120,11 @@ The `sources` are also deep-merged if an array.  It's basically all concatenated
 npm test
 ```
 
+## Dependencies
+
+[![Dependency Status](https://david-dm.org/orlin/hal-rc.svg)](https://david-dm.org/orlin/hal-rc)
+[![devDependency Status](https://david-dm.org/orlin/hal-rc/dev-status.svg)](https://david-dm.org/orlin/hal-rc#info=devDependencies)
+
 ## Unlicensed
 
 This is free and unencumbered public domain software.

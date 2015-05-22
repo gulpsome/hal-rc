@@ -9,7 +9,6 @@ var gulp = require('beverage')(require('gulp'), {
     {recipe: 'jscs'}
   ],
   sourcegateModule: false, // this is the module, self-configured
-  sourcegatePrefix: 'rc/',
   sourcegatePreset: 'airbnb'
 })
 

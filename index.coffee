@@ -7,6 +7,8 @@ sourcegate = require("sourcegate")
 nocomments = require("strip-json-comments")
 #gutil = require("gulp-util") # keep commened-out or move to dependencies
 
+detectHelp = (gulpTasks) ->
+  R.is(Object, R.path(['help', 'help'], gulpTasks))
 
 obtain = (somewhere) ->
   JSON.parse nocomments fs.readFileSync(path.normalize somewhere).toString()
@@ -19,17 +21,15 @@ get = (what, module) ->
     "node_modules/beverage/node_modules/#{module}/node_modules/#{what}"
   ]
 
-  try
-    obtain where[0]
-  catch
+  last = where.length - 1
+  for i in [0..last]
     try
-      obtain where[1]
-    catch
-      try
-        obtain where[2]
-      catch e
+      return obtain where[i]
+    catch e
+      if i is last
         console.error(e)
         throw new Error "Could not find preset at: #{where}"
+      continue
 
 
 getPreset = (tool, name, module) ->
@@ -72,14 +72,18 @@ module.exports = (o = {}, gulp) ->
       # 1. start with preset (something known / standard)
       sources.push getPreset(sg.recipe, preset, module) if preset?
       filerc = if sg.recipe is "coffeelint" then "coffeelint.json" else ".#{sg.recipe}rc"
-      config = "#{prefix}#{filerc}"
-      config = "node_modules/#{module}/#{config}" if module
-      config = path.normalize(config)
-      # 2. override with a module config (anybody can have presets)
-      if isThere config
-        if o.sourcegateWatch
-          watch.push config
-        sources.push config
+      if module?
+        # 2. override with a module config (anybody can have presets)
+        config = "#{prefix}#{filerc}"
+        config = "node_modules/#{module}/#{config}" if module # false is a valid value
+        config = path.normalize(config)
+
+        unless isThere config
+          console.error "Could not find: #{config}"
+        else
+          if o.sourcegateWatch
+            watch.push config
+          sources.push config
       sg.options.write ?= {}
       sg.options.write.path = filerc
       # 3. sources, whether an object or array, become the final override
@@ -89,6 +93,10 @@ module.exports = (o = {}, gulp) ->
     ready.push res
 
   if gulp?
+    unless detectHelp gulp.tasks
+      # required gulp-help package dependecy
+      gulp = require("gulp-help")(gulp)
+
     gulp.task "sourcegate", "Write sourcegate targets.", ->
       for sg in ready
         sourcegate.apply(null, sg)

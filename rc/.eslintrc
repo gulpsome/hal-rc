@@ -1,5 +1,6 @@
 {
   "env": {"node": true},
+  "parser": "babel-eslint",
   "rules": {
     "semi": [1, "never"],
     "quotes": [1, "single", "avoid-escape"]

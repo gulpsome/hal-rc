@@ -7,6 +7,8 @@ sourcegate = require("sourcegate")
 nocomments = require("strip-json-comments")
 #gutil = require("gulp-util") # keep commened-out or move to dependencies
 
+detectHelp = (gulpTasks) ->
+  R.is(Object, R.path(['help', 'help'], gulpTasks))
 
 obtain = (somewhere) ->
   JSON.parse nocomments fs.readFileSync(path.normalize somewhere).toString()
@@ -87,6 +89,10 @@ module.exports = (o = {}, gulp) ->
     ready.push res
 
   if gulp?
+    unless detectHelp gulp.tasks
+      # required gulp-help package dependecy
+      gulp = require("gulp-help")(gulp)
+
     gulp.task "sourcegate", "Write sourcegate targets.", ->
       for sg in ready
         sourcegate.apply(null, sg)

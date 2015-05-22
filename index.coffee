@@ -19,17 +19,15 @@ get = (what, module) ->
     "node_modules/beverage/node_modules/#{module}/node_modules/#{what}"
   ]
 
-  try
-    obtain where[0]
-  catch
+  last = where.length - 1
+  for i in [0..last]
     try
-      obtain where[1]
-    catch
-      try
-        obtain where[2]
-      catch e
+      return obtain where[i]
+    catch e
+      if i is last
         console.error(e)
         throw new Error "Could not find preset at: #{where}"
+      continue
 
 
 getPreset = (tool, name, module) ->

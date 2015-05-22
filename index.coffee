@@ -72,14 +72,18 @@ module.exports = (o = {}, gulp) ->
       # 1. start with preset (something known / standard)
       sources.push getPreset(sg.recipe, preset, module) if preset?
       filerc = if sg.recipe is "coffeelint" then "coffeelint.json" else ".#{sg.recipe}rc"
-      config = "#{prefix}#{filerc}"
-      config = "node_modules/#{module}/#{config}" if module
-      config = path.normalize(config)
-      # 2. override with a module config (anybody can have presets)
-      if isThere config
-        if o.sourcegateWatch
-          watch.push config
-        sources.push config
+      if module?
+        # 2. override with a module config (anybody can have presets)
+        config = "#{prefix}#{filerc}"
+        config = "node_modules/#{module}/#{config}" if module # false is a valid value
+        config = path.normalize(config)
+
+        unless isThere config
+          console.error "Could not find: #{config}"
+        else
+          if o.sourcegateWatch
+            watch.push config
+          sources.push config
       sg.options.write ?= {}
       sg.options.write.path = filerc
       # 3. sources, whether an object or array, become the final override

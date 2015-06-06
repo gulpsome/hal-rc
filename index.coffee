@@ -38,7 +38,7 @@ getPreset = (tool, name, module) ->
     jshint:
       airbnb: "airbnb-style/linters/jshintrc"
     eslint:
-      airbnb: "airbnb-style/linters/eslintrc"
+      airbnb: "airbnb-style/linters/.eslintrc"
     coffeelint:
       "coffeescript-style-guide": "coffeescript-style-guide/coffeelint.json"
 

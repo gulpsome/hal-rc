@@ -9,7 +9,7 @@
     "jscs",
     "jshint"
   ],
-  "version": "0.0.4",
+  "version": "0.0.4-1",
   "publish": true,
   "repository": {
     "type": "git",

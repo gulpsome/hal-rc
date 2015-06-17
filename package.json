@@ -43,8 +43,8 @@
     "mocha": "^2.2.5"
   },
   "scripts": {
+    "install": "node_modules/.bin/napa polarmobile/coffeescript-style-guide",
     "build": "node_modules/.bin/coffee-inline-map -b -o index.js index.coffee",
-    "install": "napa polarmobile/coffeescript-style-guide",
     "test": "node_modules/.bin/mocha"
   }
 }

@@ -5,10 +5,9 @@ path = require("path")
 isThere = require("is-there")
 sourcegate = require("sourcegate")
 nocomments = require("strip-json-comments")
+task = require("stamina").gulpTask
 #gutil = require("gulp-util") # keep commened-out or move to dependencies
 
-detectHelp = (gulpTasks) ->
-  R.is(Object, R.path(['help', 'help'], gulpTasks))
 
 obtain = (somewhere) ->
   JSON.parse nocomments fs.readFileSync(path.normalize somewhere).toString()
@@ -92,16 +91,13 @@ module.exports = (o = {}, gulp) ->
 
     ready.push res
 
+  # optional gulp / tasks
   if gulp?
-    unless detectHelp gulp.tasks
-      # required gulp-help package dependecy
-      gulp = require("gulp-help")(gulp)
-
-    gulp.task "sourcegate", "Write sourcegate targets.", ->
+    task gulp, "sourcegate", "Write sourcegate targets.", ->
       for sg in ready
         sourcegate.apply(null, sg)
     if o.sourcegateWatch
-      gulp.task "sourcegate:watch",
+      task gulp, "sourcegate:watch",
         "Watch sourcegate sources for changes.", ->
           gulp.watch watch, ["sourcegate"]
 

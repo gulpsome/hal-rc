@@ -42,7 +42,7 @@ describe "hal-rc", ->
     gulp = null
     for [testName, paths, so] in testWriteFiles
       before ->
-        gulp = require('gulp-help')(require('gulp'))
+        gulp = require('gulp')
         for file in paths
           try fs.unlinkSync(file)
       after ->

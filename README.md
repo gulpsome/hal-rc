@@ -74,8 +74,8 @@ The config would look like:
   module: 'name', // overrides the sourcegateModule default
   prefix: '.', // what goes between module and "#{recipe}rc"
   preset: 'name', // so far only for `jscs`, or "airbnb", or "coffeescript-style-guide"
-  sources: [], // sourcegate's first argument - stuff to merge
-  sources: {}, // shorthand for overrides that don't come from a file
+  sources: [], // sourcegate's first argument - stuff to merge (several items in a row)
+  sources: {}, // shorthand for [{}] - concat doesn't care for the type of what is merged
   options: {} // handed to sourcegate
 }
 ```

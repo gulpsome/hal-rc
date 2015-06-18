@@ -48,10 +48,5 @@
     "build": "node_modules/.bin/coffee-inline-map -b -o index.js index.coffee",
     "test": "node_modules/.bin/mocha"
   },
-  "licenses": [
-    {
-      "type": "Unlicense",
-      "url": "http://unlicense.org/"
-    }
-  ]
+  "license": "Unlicense"
 }

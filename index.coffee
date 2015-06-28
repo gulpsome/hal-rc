@@ -53,6 +53,7 @@ module.exports = (o = {}, gulp) ->
   if R.is(Array, o.sourcegate)
     if R.isEmpty(o.sourcegate) then return [empty]
   else return [empty] # or throw?
+  o.sourceopt ?= {}
   ready = []
   watch = []
 
@@ -65,9 +66,9 @@ module.exports = (o = {}, gulp) ->
       res = [sg.sources, sg.options]
     else
       sources = []
-      module = sg.module or o.sourcegateModule
-      prefix = sg.prefix or o.sourcegatePrefix or ''
-      preset = sg.preset or o.sourcegatePreset
+      module = sg.module or o.sourceopt.module
+      prefix = sg.prefix or o.sourceopt.prefix or ''
+      preset = sg.preset or o.sourceopt.preset
       # 1. start with preset (something known / standard)
       sources.push getPreset(sg.recipe, preset, module) if preset?
       filerc = if sg.recipe is "coffeelint" then "coffeelint.json" else ".#{sg.recipe}rc"
@@ -80,7 +81,7 @@ module.exports = (o = {}, gulp) ->
         unless isThere config
           console.error "Could not find: #{config}"
         else
-          if o.sourcegateWatch
+          if o.sourceopt.watch
             watch.push config
           sources.push config
       sg.options.write ?= {}
@@ -96,7 +97,7 @@ module.exports = (o = {}, gulp) ->
     task gulp, "sourcegate", "Write sourcegate targets.", ->
       for sg in ready
         sourcegate.apply(null, sg)
-    if o.sourcegateWatch
+    if o.sourceopt.watch
       task gulp, "sourcegate:watch",
         "Watch sourcegate sources for changes.", ->
           gulp.watch watch, ["sourcegate"]

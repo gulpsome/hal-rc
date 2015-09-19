@@ -5,7 +5,7 @@ path = require("path")
 isThere = require("is-there")
 sourcegate = require("sourcegate")
 nocomments = require("strip-json-comments")
-task = require("stamina").gulpTask
+task = require("be-goods").gulpTask
 #gutil = require("gulp-util") # keep commened-out or move to dependencies
 
 

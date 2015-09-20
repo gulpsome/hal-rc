@@ -1,7 +1,9 @@
 // these are additional defaults used by beverage, unless dotBeverage is customized
 // which means also for hal-rc's gulp, and its own options are set with gulpfile.js
 {
-  "sourcegateModule": "beverage/node_modules/hal-rc", // could be any git repo as well
-  "sourcegatePrefix": "rc/", // these would override any sourcegatePreset
-  "sourcegateWatch": "true"
+  "sourceopt": {
+    "module": "beverage/node_modules/hal-rc", // could be any git repo as well
+    "prefix": "rc/", // these would override any preset
+    "watch": "true"
+  }
 }

@@ -9,7 +9,7 @@
     "jscs",
     "jshint"
   ],
-  "version": "0.0.6-1",
+  "version": "0.0.7",
   "publish": true,
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
     "coffee-inline-map": "^0.8.0",
     "coffee-script": "^1.10.0",
     "gulp": "^3.9.0",
+    "gulp-npm-test": "0.0.2",
     "gulp-util": "^3.0.6",
     "mocha": "^2.3.2"
   },

@@ -13,7 +13,7 @@
   "publish": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/orlin/hal-rc.git"
+    "url": "git@github.com:gulpsome/hal-rc.git"
   },
   "licenses": [
     {

@@ -15,12 +15,6 @@
     "type": "git",
     "url": "git@github.com:gulpsome/hal-rc.git"
   },
-  "licenses": [
-    {
-      "type": "Unlicense",
-      "url": "http://unlicense.org"
-    }
-  ],
   "main": "index.js",
   "dependencies": {
     "airbnb-style": "airbnb/javascript",

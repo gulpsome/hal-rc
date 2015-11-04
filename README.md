@@ -28,16 +28,16 @@ One could setup linting rule overrides by mere configuration.  No need to fork p
 
 [![NPM](https://nodei.co/npm/hal-rc.png?mini=true)](https://www.npmjs.org/package/hal-rc)
 
-1. Make [sourcegate](https://github.com/orlin/sourcegate) more conveniently configurable, especially in the context of [beverage](https://github.com/orlin/beverage), for the purpose of writing `.*rc` files that will setup hinting and linting rules for a project - without copy / paste.  In this context `hal-rc` simply gets the options ready for calling `sourcegate` with.
+1. Make [sourcegate](https://github.com/orlin/sourcegate) more conveniently configurable, especially in the context of [beverage](https://github.com/gulpsome/beverage), for the purpose of writing `.*rc` files that will setup hinting and linting rules for a project - without copy / paste.  In this context `hal-rc` simply gets the options ready for calling `sourcegate` with.
 
     ```javascript
     var options = require('hal-rc')({
       // options listed next
     })
-    // call sourcegate with the above, see the tests about how
+    // call sourcegate with the above (see the tests about how)
     ```
 
-2. Offer `gulpfriendly` task(s) creation, while keeping it optional - i.e. call without the `gulp` argument and build your own workflow using whatever approach / other tools you may prefer instead.  However, if you do use `gulp`, I highly recommend the even more `gulpfriendly` [beverage](https://github.com/orlin/beverage).
+2. Offer `gulpfriendly` task(s) creation, while keeping it optional - i.e. call without the `gulp` argument and build your own workflow using whatever approach / other tools you may prefer instead.  However, if you do use `gulp`, I highly recommend the even more `gulpfriendly` [beverage](https://github.com/gulpsome/beverage).
 
     ```javascript
     require('hal-rc')({
@@ -123,8 +123,8 @@ npm test
 
 ## Dependencies
 
-[![Dependency Status](https://david-dm.org/orlin/hal-rc.svg)](https://david-dm.org/orlin/hal-rc)
-[![devDependency Status](https://david-dm.org/orlin/hal-rc/dev-status.svg)](https://david-dm.org/orlin/hal-rc#info=devDependencies)
+[![Dependency Status](https://david-dm.org/gulpsome/hal-rc.svg)](https://david-dm.org/gulpsome/hal-rc)
+[![devDependency Status](https://david-dm.org/gulpsome/hal-rc/dev-status.svg)](https://david-dm.org/gulpsome/hal-rc#info=devDependencies)
 
 ## Unlicensed
 

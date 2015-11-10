@@ -115,13 +115,13 @@ There is a simpler explanation about how this works.  If you state a `"recipe"`,
 
 The `sources` are also deep-merged if an array.  It's basically all concatenated into a single array and handed to `sourcegate`, one config-writing `recipe` / item at a time.
 
-## Test [![Build Status](https://img.shields.io/travis/orlin/hal-rc.svg?style=flat)](https://travis-ci.org/orlin/hal-rc)
+## Test [![Build Status](https://img.shields.io/travis/gulpsome/hal-rc.svg?style=flat)](https://travis-ci.org/gulpsome/hal-rc)
 
 ```sh
 npm test
 ```
 
-## Dependencies
+## Develop
 
 [![Dependency Status](https://david-dm.org/gulpsome/hal-rc.svg)](https://david-dm.org/gulpsome/hal-rc)
 [![devDependency Status](https://david-dm.org/gulpsome/hal-rc/dev-status.svg)](https://david-dm.org/gulpsome/hal-rc#info=devDependencies)

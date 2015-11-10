@@ -28,16 +28,16 @@ One could setup linting rule overrides by mere configuration.  No need to fork p
 
 [![NPM](https://nodei.co/npm/hal-rc.png?mini=true)](https://www.npmjs.org/package/hal-rc)
 
-1. Make [sourcegate](https://github.com/orlin/sourcegate) more conveniently configurable, especially in the context of [beverage](https://github.com/orlin/beverage), for the purpose of writing `.*rc` files that will setup hinting and linting rules for a project - without copy / paste.  In this context `hal-rc` simply gets the options ready for calling `sourcegate` with.
+1. Make [sourcegate](https://github.com/orlin/sourcegate) more conveniently configurable, especially in the context of [beverage](https://github.com/gulpsome/beverage), for the purpose of writing `.*rc` files that will setup hinting and linting rules for a project - without copy / paste.  In this context `hal-rc` simply gets the options ready for calling `sourcegate` with.
 
     ```javascript
     var options = require('hal-rc')({
       // options listed next
     })
-    // call sourcegate with the above, see the tests about how
+    // call sourcegate with the above (see the tests about how)
     ```
 
-2. Offer `gulpfriendly` task(s) creation, while keeping it optional - i.e. call without the `gulp` argument and build your own workflow using whatever approach / other tools you may prefer instead.  However, if you do use `gulp`, I highly recommend the even more `gulpfriendly` [beverage](https://github.com/orlin/beverage).
+2. Offer `gulpfriendly` task(s) creation, while keeping it optional - i.e. call without the `gulp` argument and build your own workflow using whatever approach / other tools you may prefer instead.  However, if you do use `gulp`, I highly recommend the even more `gulpfriendly` [beverage](https://github.com/gulpsome/beverage).
 
     ```javascript
     require('hal-rc')({
@@ -115,16 +115,16 @@ There is a simpler explanation about how this works.  If you state a `"recipe"`,
 
 The `sources` are also deep-merged if an array.  It's basically all concatenated into a single array and handed to `sourcegate`, one config-writing `recipe` / item at a time.
 
-## Test [![Build Status](https://img.shields.io/travis/orlin/hal-rc.svg?style=flat)](https://travis-ci.org/orlin/hal-rc)
+## Test [![Build Status](https://img.shields.io/travis/gulpsome/hal-rc.svg?style=flat)](https://travis-ci.org/gulpsome/hal-rc)
 
 ```sh
 npm test
 ```
 
-## Dependencies
+## Develop
 
-[![Dependency Status](https://david-dm.org/orlin/hal-rc.svg)](https://david-dm.org/orlin/hal-rc)
-[![devDependency Status](https://david-dm.org/orlin/hal-rc/dev-status.svg)](https://david-dm.org/orlin/hal-rc#info=devDependencies)
+[![Dependency Status](https://david-dm.org/gulpsome/hal-rc.svg)](https://david-dm.org/gulpsome/hal-rc)
+[![devDependency Status](https://david-dm.org/gulpsome/hal-rc/dev-status.svg)](https://david-dm.org/gulpsome/hal-rc#info=devDependencies)
 
 ## Unlicensed
 

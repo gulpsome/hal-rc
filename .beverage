@@ -4,6 +4,6 @@
   "sourceopt": {
     "module": "beverage/node_modules/hal-rc", // could be any git repo as well
     "prefix": "rc/", // these would override any preset
-    "watch": "true"
+    "watch": false
   }
 }

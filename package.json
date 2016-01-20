@@ -2,6 +2,13 @@
   "name": "hal-rc",
   "description": "*hints-and-lints rc*",
   "keywords": [
+    "gulp",
+    "beverage",
+    "linting",
+    "sourcecode",
+    "style",
+    "templates",
+    "bestpractices",
     "eslint",
     "coffeelint",
     "configuration",

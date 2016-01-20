@@ -1,5 +1,9 @@
 # hal (-) \*rc
 
+[![version npm](https://img.shields.io/npm/v/hal-rc.svg?style=flat-square)](https://www.npmjs.com/package/hal-rc)
+[![dependencies](https://img.shields.io/david/gulpsome/hal-rc.svg?style=flat-square)](https://david-dm.org/gulpsome/hal-rc)
+[![build status](https://img.shields.io/travis/gulpsome/hal-rc.svg?style=flat-square)](http://travis-ci.org/gulpsome/hal-rc)
+
 *Hal should be, well, linted, to begin with.*
 
 ## Why

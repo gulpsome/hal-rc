@@ -44,8 +44,7 @@ getPreset = (tool, name, module) ->
     eslint:
       airbnb: "airbnb-style/linters/.eslintrc"
     coffeelint:
-      # this can't really be found - polarmobile never published it on npm
-      "coffeescript-style-guide": "hal-coffeescript-style-guide/coffeelint.json"
+      "hal-coffeescript-style-guide": "hal-coffeescript-style-guide/coffeelint.json"
 
   if tool is "jscs"
     get("#{presets.jscs}/#{name}.json", module)
@@ -81,10 +80,12 @@ module.exports = (o = {}, gulp) ->
       if preset?
         sources.push getPreset(sg.recipe, preset, module)
       filerc = if sg.recipe is "coffeelint" then "coffeelint.json" else ".#{sg.recipe}rc"
-      if module?
+      if module? && module isnt '!'
         # 2. override with a module config (anybody can have presets)
+        # `module is false` means hal-rc's defaults will be used
+        # `module is '!'` would favor the preset + local non-module overrides
         config = "#{prefix}#{filerc}"
-        if module # false is a valid value
+        if module
           config = "node_modules/#{module}/#{config}"
         config = path.normalize(config)
         logUse "Source #{config}"

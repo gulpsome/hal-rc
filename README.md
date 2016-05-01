@@ -21,7 +21,7 @@ For one example this could be the perfect implementation of your *code linting* 
 
 ```javascript
 var gulp = require('beverage')(require('gulp'), {
-  sourceopt: {preset: 'airbnb'},
+  sourceopt: {preset: 'airbnb', module: '!'},
   sourcegate: [{recipe: 'jscs'}, {recipe: 'jshint'}]
 })
 ```
@@ -56,7 +56,7 @@ One could setup linting rule overrides by mere configuration.  No need to fork p
 
 - `sourcegate: []` creates tasks that write configuration files, documented further down
 - `sourceopt:`
-  - `module: 'a-node_modules-module-name'` optional like everything else
+  - `module: 'a-node_modules-module-name'` optional like everything else; a value of '!' means no module will be used, nor `hal-rc`'s module defaults, useful for presets not being overriden
   - `prefix`: '.'` will look for `".#{recipe}rc"`, it can also be a path fragment
   - `preset: 'airbnb'` for example, in some cases there are presets across tools, this sets a default one for configuration DRY-ness; presets of tools installed in the project's `node_modules` have priority over presets form `sourceopt.module`'s `node_modules`, this way a project can have its own version of presets
   - `watch: true` will create a `sourcegate:watch` task, if `hal-rc` is handed `gulp` via the second argument

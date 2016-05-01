@@ -19,6 +19,7 @@ get = (what, module) ->
     "node_modules/#{what}",
     "node_modules/#{module}/node_modules/#{what}",
     "node_modules/beverage/node_modules/#{module}/node_modules/#{what}"
+    "node_modules/beverage/node_modules/hal-rc/node_modules/#{what}"
   ]
 
   last = where.length - 1

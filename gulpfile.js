@@ -5,7 +5,9 @@ var gulp = require('beverage')(require('gulp'), {
     watch: ['index.js', 'test/*.coffee']
   },
   sourcegate: [
-    {recipe: 'coffeelint', preset: 'coffeescript-style-guide'},
+    {recipe: 'coffeelint',
+     module: 'hal-coffeescript-style-guide',
+     prefix: './'},
     {recipe: 'jshint'},
     {recipe: 'jscs'}
   ],

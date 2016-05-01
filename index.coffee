@@ -6,14 +6,15 @@ isThere = require("is-there")
 sourcegate = require("sourcegate")
 nocomments = require("strip-json-comments")
 task = require("be-goods").gulpTask
-#gutil = require("gulp-util") # keep commened-out or move to dependencies
+logger = require("be-goods").logger
 
+logUse = (what = "") -> console.log what if process.argv[2] is "sourcegate"
 
 obtain = (somewhere) ->
   JSON.parse nocomments fs.readFileSync(path.normalize somewhere).toString()
 
 get = (what, module) ->
-  # gutil.log "find what '#{what}' in module '#{module}'"
+  # gutil.log "Looking for '#{what}' in module '#{module}'"
   where = [
     "node_modules/#{what}",
     "node_modules/#{module}/node_modules/#{what}",
@@ -23,15 +24,19 @@ get = (what, module) ->
   last = where.length - 1
   for i in [0..last]
     try
-      return obtain where[i]
+      gotIt = obtain where[i]
+      logUse "Source #{where[i]}"
+      return gotIt
     catch e
       if i is last
-        console.error(e)
+        logger.error(e)
         throw new Error "Could not find preset at: #{where}"
       continue
 
 
 getPreset = (tool, name, module) ->
+  # the tool is known as recipe
+  # the name is known as preset
   presets =
     jscs: "jscs/presets" #{preset}.json will be appended
     jshint:
@@ -39,7 +44,8 @@ getPreset = (tool, name, module) ->
     eslint:
       airbnb: "airbnb-style/linters/.eslintrc"
     coffeelint:
-      "coffeescript-style-guide": "coffeescript-style-guide/coffeelint.json"
+      # this can't really be found - polarmobile never published it on npm
+      "coffeescript-style-guide": "hal-coffeescript-style-guide/coffeelint.json"
 
   if tool is "jscs"
     get("#{presets.jscs}/#{name}.json", module)
@@ -65,21 +71,26 @@ module.exports = (o = {}, gulp) ->
       # 0. without a recipe, hal-rc just hands sources and options to sourcegate
       res = [sg.sources, sg.options]
     else
+      logUse()
+      logUse("For #{sg.recipe}:")
       sources = []
       module = sg.module or o.sourceopt.module
       prefix = sg.prefix or o.sourceopt.prefix or ''
       preset = sg.preset or o.sourceopt.preset
       # 1. start with preset (something known / standard)
-      sources.push getPreset(sg.recipe, preset, module) if preset?
+      if preset?
+        sources.push getPreset(sg.recipe, preset, module)
       filerc = if sg.recipe is "coffeelint" then "coffeelint.json" else ".#{sg.recipe}rc"
       if module?
         # 2. override with a module config (anybody can have presets)
         config = "#{prefix}#{filerc}"
-        config = "node_modules/#{module}/#{config}" if module # false is a valid value
+        if module # false is a valid value
+          config = "node_modules/#{module}/#{config}"
         config = path.normalize(config)
+        logUse "Source #{config}"
 
         unless isThere config
-          console.error "Could not find: #{config}"
+          logger.error "Could not find: #{config}"
         else
           if o.sourceopt.watch
             watch.push config
@@ -102,4 +113,5 @@ module.exports = (o = {}, gulp) ->
         "Watch sourcegate sources for changes.", ->
           gulp.watch watch, ["sourcegate"]
 
+  logUse()
   ready

@@ -24,7 +24,7 @@
   },
   "line_endings": {
     "name": "line_endings",
-    "level": "warn",
+    "level": "ignore",
     "value": "unix"
   },
   "no_trailing_semicolons": {
@@ -42,9 +42,8 @@
   },
   "colon_assignment_spacing": {
     "name": "colon_assignment_spacing",
-    "level": "warn",
+    "level": "ignore",
     "spacing": {
-      "left": 0,
       "right": 1
     }
   },
@@ -111,14 +110,8 @@
     "name": "non_empty_constructor_needs_parens",
     "level": "ignore"
   },
-  "no_interpolation_in_single_quotes": {
-    "level": "error"
-  },
-  "no_debugger": {
-    "level": "error"
-  },
-  "braces_spacing": {
-    "spaces": 0,
-    "level": "warn"
+  "no_unnecessary_double_quotes": {
+    "name": "no_unnecessary_double_quotes",
+    "level": "ignore"
   }
 }

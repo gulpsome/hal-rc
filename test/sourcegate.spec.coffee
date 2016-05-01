@@ -23,7 +23,7 @@ testWriteFiles = [
     [{
       recipe: 'jshint',
       module: 'hal-rc',
-      prefix: '.',
+      prefix: 'rc/',
       options: {write: {root: testWR}}
     }]
   ]

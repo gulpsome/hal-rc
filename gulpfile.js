@@ -4,6 +4,10 @@ var gulp = require('beverage')(require('gulp'), {
   test: {
     watch: ['index.js', 'test/*.coffee']
   },
+  sourceopt: {
+    module: false, // this is the module, self-configured
+    preset: 'airbnb'
+  },
   sourcegate: [
     {recipe: 'coffeelint',
      preset: 'hal-coffeescript-style-guide',
@@ -11,11 +15,7 @@ var gulp = require('beverage')(require('gulp'), {
     },
     {recipe: 'jshint'},
     {recipe: 'jscs'}
-  ],
-  sourceopt: {
-    module: false, // this is the module, self-configured
-    preset: 'airbnb'
-  }
+  ]
 })
 
 gulp.task('dev', 'DEVELOP', [
